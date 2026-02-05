@@ -40,6 +40,46 @@ class TodoController extends Controller
         return redirect()->route('home')->with('success', 'Todo created successfully');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function updateStatus($id)
+    {
+        $todo = Todo::findOrFail($id);
+        $todo->update(['complete' => !$todo->complete]);
+        return redirect()->route('home')->with('success', 'Task is completed');
+    }
+    public function updateTodo($id, Request $request)
+    {
+
+        $validate = $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg'
+
+        ]);
+        $image = null;
+        if ($request->hasFile('image')) {
+            $image = time() . '_' . $request->image->getClientOriginalName();
+            $request->image->move(public_path('images'), $image);
+        }
+        $todo = Todo::findOrFail($id);
+        $todo->name = $request->name;
+        $todo->price = $request->price;
+        $todo->image = $image;
+        $todo->save();
+        return redirect()->route('home')->with('success', 'Todo updated successfully');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function delete($id)
+    {
+        $todo = Todo::findOrFail($id);
+        $todo->delete();
+        return redirect()->route('home')->with('success', 'Your todo is successfully delated');
+    }
 
     /**
      * Show the form for editing the specified resource.
