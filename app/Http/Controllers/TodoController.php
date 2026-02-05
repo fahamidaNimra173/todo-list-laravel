@@ -51,22 +51,23 @@ class TodoController extends Controller
     }
     public function updateTodo($id, Request $request)
     {
-
+        $todo = Todo::findOrFail($id);
         $validate = $request->validate([
             'name' => 'required',
             'price' => 'required',
             'image' => 'nullable|image|mimes:jpg,png,jpeg'
 
         ]);
-        $image = null;
+
         if ($request->hasFile('image')) {
             $image = time() . '_' . $request->image->getClientOriginalName();
             $request->image->move(public_path('images'), $image);
+            $todo->image = $image; //this means save the image file into the image column of this todo row
         }
-        $todo = Todo::findOrFail($id);
+
         $todo->name = $request->name;
         $todo->price = $request->price;
-        $todo->image = $image;
+
         $todo->save();
         return redirect()->route('home')->with('success', 'Todo updated successfully');
     }
