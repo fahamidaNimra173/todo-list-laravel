@@ -1,7 +1,9 @@
-<nav class="bg-gray-900 text-white px-6 py-4 flex items-center justify-between">
+<!-- <script src="{{asset('js/modal.js') }}"></script> -->
+
+<nav class=" bg-green-800/10 text-black px-6 py-4 flex items-center justify-between">
     <!-- Logo / Brand -->
     <div class="text-xl font-bold">
-        <a href="{{ route('home') }}" class="text-orange-400">
+        <a href="{{ route('home') }}" class="text-green-500">
             TodoApp
         </a>
     </div>
@@ -21,7 +23,7 @@
         </li>
 
         <li>
-            <a href="#" class="hover:text-orange-400">
+            <a href="{{route('about')}}" class="hover:text-orange-400">
                 About
             </a>
         </li>
@@ -29,7 +31,7 @@
 
     <!-- Right side button -->
     <div>
-        <a href="#" class="bg-orange-500 px-4 py-2 rounded hover:bg-orange-600">
+        <a onclick="openModal()" class="bg-orange-500 text-white font-semibold cursor-pointer px-4 py-2 rounded hover:bg-orange-600">
             Add Todo
         </a>
     </div>

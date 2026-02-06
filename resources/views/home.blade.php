@@ -3,60 +3,44 @@
 
 @section('content')
 <div>
-    <div class="overflow-x-auto translate-y-1/2 mx-5 mt-20 bg-gray-900/10 text-white shadow rounded-lg">
-        <table class="min-w-full border border-gray-800">
+    <h1 class="text-orange-600 mt-20 font-bold text-3xl text-center my-5 ">List of your works</h1>
+    <div class="overflow-x-auto mb-40 mx-5   text-white shadow rounded-lg">
 
-            <thead class="bg-gray-900 border-b border-gray-800">
+        <table class="min-w-full border border-gray-400">
+
+            <thead class="bg-green-600/10 border-b border-gray-400 w-full">
                 <tr>
-                    <th class="px-4 py-3 text-left text-sm font-semibold text-orange-400">#</th>
-                    <th class="px-4 py-3 text-left text-sm font-semibold text-orange-400">Name</th>
-                    <th class="px-4 py-3 text-left text-sm font-semibold text-orange-400">Price</th>
-                    <th class="px-4 py-3 text-left text-sm font-semibold text-orange-400">Status</th>
-                    <th class="px-4 py-3 text-left text-sm font-semibold text-orange-400">Action</th>
+                    <th class="px-4 py-3 text-left  font-semibold text-orange-600">#</th>
+                    <th class="px-4 py-3 text-left  font-semibold text-orange-600">Image</th>
+                    <th class="px-4 py-3 text-left  font-semibold text-orange-600">Name</th>
+                    <th class="px-4 py-3 text-left  font-semibold text-orange-600">Price</th>
+                    <th class="px-4 py-3 text-left  font-semibold text-orange-600">Status</th>
+                    <th class="px-4 py-3 text-left  font-semibold text-orange-600">Action</th>
                 </tr>
             </thead>
 
-            <tbody class="divide-y divide-gray-800">
+            <tbody class="divide-y divide-gray-400">
+                @foreach($todos as $singleTodo)
+
                 <tr class="">
-                    <td class="px-4 py-3 text-black ">1</td>
-                    <td class="px-4 py-3 text-black ">Buy Milk</td>
-                    <td class="px-4 py-3 text-black ">$10</td>
-                    <td class="px-4 py-3 text-orange-400 font-semibold">Pending</td>
+                    <td class="px-4 py-3 text-black ">{{$singleTodo->id}}</td>
+                    <td class="px-4 py-3 text-black ">
+                        <img class="w-15 h-15" src="images/{{$singleTodo->image}}" alt="">
+                    </td>
+                    <td class="px-4 py-3 text-black ">{{$singleTodo->name}}</td>
+                    <td class="px-4 py-3 text-black ">{{$singleTodo->price}}</td>
+                    <td class="px-4 py-3 {{$singleTodo->complete?'text-green-600':'text-orange-600'}} font-semibold cursor-pointer">
+                        <a href="{{route('status',$singleTodo->id)}}"> {{$singleTodo->complete?'Completed':'Pending'}}</a>
+
+                    </td>
                     <td class="px-4 py-3">
-                        <button class="text-green-600 hover:underline">Edit</button>
-                        <button class="text-red-500 hover:underline ml-3">Delete</button>
+                        <a href="{{route('update',$singleTodo->id)}}" class="text-green-600 hover:underline cursor-pointer">Edit</a>
+
+                        <a href="{{route('delete',$singleTodo->id)}}" class="text-red-500 hover:underline ml-3 cursor-pointer">Delete</a>
                     </td>
                 </tr>
-                <tr class="hover:bg-gray-800">
-                    <td class="px-4 py-3 text-black">1</td>
-                    <td class="px-4 py-3 text-black">Buy Milk</td>
-                    <td class="px-4 py-3 text-black">$10</td>
-                    <td class="px-4 py-3 text-orange-400 font-semibold">Pending</td>
-                    <td class="px-4 py-3">
-                        <button class="text-green-600 hover:underline">Edit</button>
-                        <button class="text-red-500 hover:underline ml-3">Delete</button>
-                    </td>
-                </tr>
-                <tr class="hover:bg-gray-800">
-                    <td class="px-4 py-3 text-black">1</td>
-                    <td class="px-4 py-3 text-black">Buy Milk</td>
-                    <td class="px-4 py-3 text-black">$10</td>
-                    <td class="px-4 py-3 text-orange-400 font-semibold">Pending</td>
-                    <td class="px-4 py-3">
-                        <button class="text-green-600 hover:underline">Edit</button>
-                        <button class="text-red-500 hover:underline ml-3">Delete</button>
-                    </td>
-                </tr>
-                <tr class="hover:bg-gray-800">
-                    <td class="px-4 py-3 text-black">1</td>
-                    <td class="px-4 py-3 text-black">Buy Milk</td>
-                    <td class="px-4 py-3 text-black">$10</td>
-                    <td class="px-4 py-3 text-orange-400 font-semibold">Pending</td>
-                    <td class="px-4 py-3">
-                        <button class="text-green-600 hover:underline">Edit</button>
-                        <button class="text-red-500 hover:underline ml-3">Delete</button>
-                    </td>
-                </tr>
+                @endforeach
+
 
 
             </tbody>

@@ -15,14 +15,17 @@
 
 </head>
 
-<body class="bg-[#FDFDFC] h-screen">
+<body class="bg-[#FDFDFC] ">
     <header class="mb-5">
         @component('components.navigation')
         @endcomponent
     </header>
-
-
+    @component('components.createModal')
+    @endcomponent
+    <!-- body content like outlet in react -->
     @yield('content')
+    <!-- Logic for modal to create a todo -->
+    <script src="{{asset('js/modal.js') }}"></script>
     <!-- 
     <footer class="mt-10">
         @component('components.footer')

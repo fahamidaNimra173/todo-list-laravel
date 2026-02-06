@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Todo extends Model
 {
-    protected $fillable = ['name', 'price', 'picture', 'complete'];
+    protected $fillable = ['name', 'price', 'image', 'complete'];
     //
 }
