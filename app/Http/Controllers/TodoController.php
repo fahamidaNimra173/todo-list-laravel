@@ -71,6 +71,12 @@ class TodoController extends Controller
         $todo->save();
         return redirect()->route('home')->with('success', 'Todo updated successfully');
     }
+    public function edit($id)
+    {
+        $todo = Todo::findOrFail($id);
+
+        return view('update', compact('todo'));
+    }
 
     /**
      * Display the specified resource.
